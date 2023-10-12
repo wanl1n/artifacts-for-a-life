@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental;
 using UnityEngine;
 
 [Serializable]  
@@ -15,13 +16,12 @@ public class ArtifactSpawner : MonoBehaviour
     [SerializeField]
     int spawnLimit;
 
-    //private void Awake()
-    //{
-    //    spawnPositionOffset += this.GetObjectRadius();   
-    //}
+    [SerializeField] private GameObject[] spawnPoints;
+    private GameObject[] artifacts;
+
     void Start()
     {
-        //StartCoroutine(SpawnArtifactRepeatedly());
+        spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
         StartCoroutine(SpawnArtifact());
     }
 
@@ -29,70 +29,20 @@ public class ArtifactSpawner : MonoBehaviour
     {
         if(this.currentSpawned >= this.spawnLimit)
             StopCoroutine(SpawnArtifact());
+
+
+        this.artifacts = GameObject.FindGameObjectsWithTag("Artifact");
+        this.currentSpawned = this.artifacts.Length;
     }
 
     IEnumerator SpawnArtifact()
     {
         while (this.currentSpawned < this.spawnLimit)
         {
+            int random = UnityEngine.Random.Range(0, spawnPoints.Length);
+            Instantiate(artifact, spawnPoints[random].transform.position, Quaternion.identity);
             yield return new WaitForSeconds(spawnInterval);
-
-            if (artifact != null)
-            {
-                Instantiate(artifact, this.RandomizePosition(), Quaternion.identity);
-
-                currentSpawned++;
-                //Debug.Log("Spawned");
-                //Debug.Log(currentSpawned.ToString());
-            }
-            else
-            {
-                Debug.Log("Prefab to spawn is not assigned!");
-            }
         }
     }
 
-    private Vector3 RandomizePosition()
-    {
-        Bounds targetBounds = spawnBoundary.GetComponent<MeshRenderer>().bounds;
-
-        // Generate random X and Z coordinates within the bounds of spawnBoundary.
-        float randomX = UnityEngine.Random.Range(-1.5f, 1.5f);
-        float randomZ = UnityEngine.Random.Range(-1.0f, 18.0f);
-
-        // Use the fixed Y coordinate with your spawnPositionOffset.
-
-        Vector3 randomizedPosition = new Vector3(randomX, 1.0f, randomZ);
-
-        return randomizedPosition;
-    }
-
-    //Quaternion GetRandomizedRotation()
-    //{//only for y and z axes.
-    //    Quaternion currentRotation = transform.rotation;
-
-    //    float randomY = UnityEngine.Random.Range(0f, 360f);
-    //    float randomZ = UnityEngine.Random.Range(0f, 360f);
-
-    //    Quaternion randomRotation = Quaternion.Euler(currentRotation.eulerAngles.x, randomY, randomZ);
-
-    //    return randomRotation;
-    //}
-
-    float GetObjectRadius()
-    {
-        MeshRenderer renderer = artifact.GetComponent<MeshRenderer>();
-
-        if (renderer != null)
-        {
-            // Get the radius from the bounds.
-            float radius = renderer.bounds.extents.x;
-            return radius;
-        }
-        else
-        {
-            Debug.LogWarning("No MeshRenderer component found on the object.");
-            return 0.0f;
-        }
-    }
 }

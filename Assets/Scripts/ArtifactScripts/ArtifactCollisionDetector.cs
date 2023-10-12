@@ -5,21 +5,17 @@ using UnityEngine;
 [Serializable]
 public class ArtifactCollisionDetector : MonoBehaviour
 {
-    public PlayerStatsManager playerStatsManager;
-    public GameObject playerCollectionRange;
-    public GameObject score; // Change the variable type to GameObject
 
-    public void Update()
+    [SerializeField] private PlayerStatsManager playerStatsManager;
+
+    private void Start()
     {
-        CheckPlayerCollision();
+        playerStatsManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatsManager>();
     }
 
-    private void CheckPlayerCollision()
+    private void OnTriggerEnter(Collider other)
     {
-        Bounds playerBounds = playerCollectionRange.GetComponentInChildren<MeshRenderer>().bounds;
-        Bounds artifactBounds = GetComponentInChildren<MeshRenderer>().bounds;
-
-        if (playerBounds.Intersects(artifactBounds))
+        if (other.gameObject.name == "Player")
         {
             IncrementScore();
             Destroy(gameObject);
@@ -28,6 +24,6 @@ public class ArtifactCollisionDetector : MonoBehaviour
 
     private void IncrementScore()
     {
-        playerStatsManager.artifactsCollected++;
+        playerStatsManager.IncrementScore();
     }
 }

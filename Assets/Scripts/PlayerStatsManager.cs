@@ -15,12 +15,11 @@ public class PlayerStatsManager : MonoBehaviour
     void Start()
     {
         
-    }
+    }   
 
-    // Update is called once per frame
-    void Update()
+    public void IncrementScore()
     {
+        artifactsCollected++;
         artifactCounter.text = artifactsCollected.ToString();
-        toolCounter.text = toolsCollected.ToString();  
     }
 }
