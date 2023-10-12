@@ -14,7 +14,6 @@ public class ArtifactCollisionDetector : MonoBehaviour
         CheckPlayerCollision();
     }
 
-    // This method is called when a collision occurs.
     private void CheckPlayerCollision()
     {
         Bounds playerBounds = playerCollectionRange.GetComponentInChildren<MeshRenderer>().bounds;
