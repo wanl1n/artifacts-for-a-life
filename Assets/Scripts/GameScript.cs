@@ -18,6 +18,11 @@ public class GameScript : MonoBehaviour
         winnerText.SetText("YOU GATHERED " + playerStatsManager.artifactsCollected + " ARTIFACTS AND INCREASED \nTHE REVENUE OF YOUR MUSEUM!!!");
     }
 
+    public void gameOver()
+    {
+        _winnerScreen.SetActive(true);
+        winnerText.SetText("OH NO! YOU ARE TRAPPED! YOUR " + playerStatsManager.artifactsCollected + " COLLECTED ARTIFACTS ARE WASTED!");
+    }
 
     public void restartGame()
     {
