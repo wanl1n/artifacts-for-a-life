@@ -1,27 +1,34 @@
 using System;
+using TMPro;
 using UnityEngine;
-
 
 [Serializable]
 public class ArtifactCollisionDetector : MonoBehaviour
 {
+    public PlayerStatsManager playerStatsManager;
     public GameObject playerCollectionRange;
+    public GameObject score; // Change the variable type to GameObject
 
     public void Update()
     {
-        this.checkPlayerCollision();
+        CheckPlayerCollision();
     }
 
     // This method is called when a collision occurs.
-    private void checkPlayerCollision()
+    private void CheckPlayerCollision()
     {
         Bounds playerBounds = playerCollectionRange.GetComponentInChildren<MeshRenderer>().bounds;
-        Bounds artifactBounds = this.GetComponentInChildren<MeshRenderer>().bounds;
+        Bounds artifactBounds = GetComponentInChildren<MeshRenderer>().bounds;
 
         if (playerBounds.Intersects(artifactBounds))
         {
-            Debug.Log("Player has collided with the artifact.");
-            Destroy(this.gameObject);
+            IncrementScore();
+            Destroy(gameObject);
         }
+    }
+
+    private void IncrementScore()
+    {
+        playerStatsManager.artifactsCollected++;
     }
 }

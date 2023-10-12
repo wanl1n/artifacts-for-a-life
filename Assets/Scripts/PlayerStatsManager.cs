@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PlayerStatsManager : MonoBehaviour
 {
-    float artifactsCollected = 0;
-    float toolsCollected = 0;
+    public float artifactsCollected = 0;
+    public float toolsCollected = 0;
 
     public TMP_Text artifactCounter;
     public TMP_Text toolCounter;

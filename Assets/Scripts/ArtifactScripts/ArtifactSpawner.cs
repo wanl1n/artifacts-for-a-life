@@ -15,9 +15,6 @@ public class ArtifactSpawner : MonoBehaviour
     [SerializeField]
     int spawnLimit;
 
-
-    float spawnPositionOffset = 1.0f;
-
     //private void Awake()
     //{
     //    spawnPositionOffset += this.GetObjectRadius();   
@@ -36,7 +33,7 @@ public class ArtifactSpawner : MonoBehaviour
 
     IEnumerator SpawnArtifact()
     {
-        while (this.currentSpawned <= this.spawnLimit)
+        while (this.currentSpawned < this.spawnLimit)
         {
             yield return new WaitForSeconds(spawnInterval);
 
@@ -45,8 +42,8 @@ public class ArtifactSpawner : MonoBehaviour
                 Instantiate(artifact, this.RandomizePosition(), Quaternion.identity);
 
                 currentSpawned++;
-                Debug.Log("Spawned");
-                Debug.Log(currentSpawned.ToString());
+                //Debug.Log("Spawned");
+                //Debug.Log(currentSpawned.ToString());
             }
             else
             {
