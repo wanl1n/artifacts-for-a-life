@@ -61,7 +61,7 @@ public class ArtifactSpawner : MonoBehaviour
 
         // Generate random X and Z coordinates within the bounds of spawnBoundary.
         float randomX = UnityEngine.Random.Range(-1.5f, 1.5f);
-        float randomZ = UnityEngine.Random.Range(-1.0f, 7.0f);
+        float randomZ = UnityEngine.Random.Range(-1.0f, 18.0f);
 
         // Use the fixed Y coordinate with your spawnPositionOffset.
 
