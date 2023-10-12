@@ -15,7 +15,7 @@ public class GameScript : MonoBehaviour
     public void winner()
     {
         _winnerScreen.SetActive(true);
-        winnerText.SetText("YOU GATHERED" + playerStatsManager.artifactsCollected + "ARTIFACTS AND INCREASED \nTHE REVENUE OF YOUR MUSEUM!!!");
+        winnerText.SetText("YOU GATHERED " + playerStatsManager.artifactsCollected + " ARTIFACTS AND INCREASED \nTHE REVENUE OF YOUR MUSEUM!!!");
     }
 
 
