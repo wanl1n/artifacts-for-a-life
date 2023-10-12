@@ -11,7 +11,7 @@ public class CollectionRangeProperties : MonoBehaviour
         this.transform.position = newPosition; // Set the new position
 
         Vector3 newScale = this.transform.localScale;
-        newScale.y = this.GetComponentInParent<MeshRenderer>().bounds.max.y;
+        newScale.y = this.GetComponentInParent<MeshRenderer>().bounds.max.y*3;
         this.transform.localScale = newScale;
     }
 
