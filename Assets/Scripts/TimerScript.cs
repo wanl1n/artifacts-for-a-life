@@ -22,14 +22,14 @@ public class TimerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (time > 0)
+        if (time > 0 && !_gameScript.GetGameFinished())
         {
             time -= Time.deltaTime;
         }
         else if (time < 0)
         {
             time = 0;
-            _gameScript.gameOver();
+            _gameScript.GameOver();
         }
 
         int mins = Mathf.FloorToInt(time / 60);

@@ -35,7 +35,8 @@ public class ToolScript : MonoBehaviour
 
         if (this.gameObject.tag == "Ladder")
         {
-            _GameManager.GetComponent<GameScript>().winner();
+            _GameManager.GetComponent<GameScript>().Winner();
+            _GameManager.GetComponent<GameScript>().SetGameFinished(true);
             _toolPanel.SetActive(false);
         }
     }
